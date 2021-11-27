@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+  <div th:each="p : ${pictures}">
+
+    <img th:src="${p.getUrl()}" th:alt="${p.getTitle()}"/></br>
+
+    <form th:action="@{/pictures/delete}"
+          th:method="delete">
+
+      <input type="hidden" name="public_id" th:value="${p.publicId}"/>
+      <input type="submit" value="Delete"/>
+
+    </form>
+
+    <br/>
+
+  </div>
+
+
+</body>
+</html>
