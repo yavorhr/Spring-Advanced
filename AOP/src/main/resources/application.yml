@@ -1,0 +1,12 @@
+examples:
+  basic.enabled: false
+  modifying.enabled: false
+
+slos-config:
+  slos:
+    -
+      id: local_operation
+      treshold: 60
+    -
+      id: remote_operation
+      treshold: 500
