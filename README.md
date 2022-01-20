@@ -14,3 +14,5 @@ The [Spring Advanced](https://softuni.bg/trainings/3494/spring-advanced-october-
 -	**Deployment** of Spring MVC application
 -	Basics of **testing in web applications** built with Spring MVC
 -	Build more complex web applications with a **Spring framework**
+
+![Spring Advanced - October 2021 - Certificate](https://user-images.githubusercontent.com/76119513/150367574-42a42980-244a-49ef-8323-f14f83bd98a1.jpeg)
