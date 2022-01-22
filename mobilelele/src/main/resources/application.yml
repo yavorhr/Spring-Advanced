@@ -3,7 +3,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: "jdbc:mysql://localhost:3306/mobilelele?useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
     username: root
-    password: showMeTheCode2020
+    password: 
 
   sql:
     init:
