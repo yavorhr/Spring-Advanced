@@ -13,14 +13,8 @@ public class Author extends BaseEntity {
   private String lastName;
   private Integer age;
   private String publisher;
-  private List<Author> books;
 
   public Author() {
-  }
-
- @OneToMany(mappedBy = "author")
-  public List<Author> getBooks() {
-    return books;
   }
 
   public String getFirstName() {
@@ -59,8 +53,4 @@ public class Author extends BaseEntity {
     return this;
   }
 
-  public Author setBooks(List<Author> books) {
-    this.books = books;
-    return this;
-  }
 }
