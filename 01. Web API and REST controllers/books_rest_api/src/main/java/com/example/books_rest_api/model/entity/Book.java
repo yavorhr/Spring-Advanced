@@ -60,7 +60,7 @@ public class Book extends BaseEntity {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    
+
     sb
             .append(String.format("Title : %s\n", this.title))
             .append(String.format("Release Date: %s\n", this.releaseDate))
