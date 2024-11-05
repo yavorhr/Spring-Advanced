@@ -1,9 +1,8 @@
 package com.example.books_rest_api.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,8 +12,17 @@ public class Author extends BaseEntity {
   private String lastName;
   private Integer age;
   private String publisher;
+  private List<Book> books;
 
   public Author() {
+    this.books = new ArrayList<>();
+  }
+
+  @OneToMany(mappedBy = "author",
+          cascade = CascadeType.ALL,
+          fetch = FetchType.EAGER)
+  public List<Book> getBooks() {
+    return books;
   }
 
   public String getFirstName() {
@@ -53,4 +61,24 @@ public class Author extends BaseEntity {
     return this;
   }
 
+  public Author setBooks(List<Book> books) {
+    this.books = books;
+    return this;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format("Author's full name : %s %s", this.firstName, this.lastName))
+            .append(System.lineSeparator())
+            .append(String.format("Age : %d", this.age))
+            .append(System.lineSeparator())
+            .append(String.format("Publisher: %s", this.publisher))
+            .append(System.lineSeparator())
+            .append("Books:").append(System.lineSeparator());
+
+    this.getBooks().forEach(b -> sb.append(b.toString()).append(System.lineSeparator()));
+
+    return sb.toString().trim();
+  }
 }
