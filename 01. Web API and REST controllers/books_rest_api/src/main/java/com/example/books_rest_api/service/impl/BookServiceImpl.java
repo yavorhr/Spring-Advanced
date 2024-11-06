@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -63,6 +64,11 @@ public class BookServiceImpl implements BookService {
               return bookDto;
             })
             .collect(Collectors.toList());
+  }
+
+  @Override
+  public Optional<BookDto> findById(Long id) {
+    return this.bookRepository.findById(id).map(b -> this.modelMapper.map(b, BookDto.class));
   }
 
   private Author getAuthorByNames(String token) {
