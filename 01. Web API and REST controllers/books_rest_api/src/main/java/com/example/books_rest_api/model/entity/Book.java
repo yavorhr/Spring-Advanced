@@ -13,8 +13,13 @@ public class Book extends BaseEntity {
   private LocalDate releaseDate;
   private Integer copies;
   private Author author;
+  private String publisher;
 
   public Book() {
+  }
+
+  public String getPublisher() {
+    return publisher;
   }
 
   public String getTitle() {
@@ -51,6 +56,11 @@ public class Book extends BaseEntity {
 
   public Book setAuthor(Author author) {
     this.author = author;
+    return this;
+  }
+
+  public Book setPublisher(String publisher) {
+    this.publisher = publisher;
     return this;
   }
 
