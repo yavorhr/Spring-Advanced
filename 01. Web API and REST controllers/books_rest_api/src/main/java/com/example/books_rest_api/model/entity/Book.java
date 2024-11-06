@@ -1,6 +1,7 @@
 package com.example.books_rest_api.model.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -42,7 +43,7 @@ public class Book extends BaseEntity {
     return copies;
   }
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.EAGER)
   public Author getAuthor() {
     return author;
   }
