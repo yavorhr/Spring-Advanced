@@ -1,12 +1,13 @@
 package com.example.books_rest_api.model.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "author")
+@Table(name = "authors")
 public class Author extends BaseEntity {
   private String firstName;
   private String lastName;
@@ -15,12 +16,9 @@ public class Author extends BaseEntity {
   private List<Book> books;
 
   public Author() {
-    this.books = new ArrayList<>();
   }
 
-  @OneToMany(mappedBy = "author",
-          cascade = CascadeType.ALL,
-          fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "author")
   public List<Book> getBooks() {
     return books;
   }
@@ -29,13 +27,26 @@ public class Author extends BaseEntity {
     return firstName;
   }
 
-  public Author setFirstName(String firstName) {
-    this.firstName = firstName;
+  public String getLastName() {
+    return lastName;
+  }
+
+  public Integer getAge() {
+    return age;
+  }
+
+  public String getPublisher() {
+    return publisher;
+  }
+
+  public Author setBooks(List<Book> books) {
+    this.books = books;
     return this;
   }
 
-  public String getLastName() {
-    return lastName;
+  public Author setFirstName(String firstName) {
+    this.firstName = firstName;
+    return this;
   }
 
   public Author setLastName(String lastName) {
@@ -43,26 +54,13 @@ public class Author extends BaseEntity {
     return this;
   }
 
-  public Integer getAge() {
-    return age;
-  }
-
   public Author setAge(Integer age) {
     this.age = age;
     return this;
   }
 
-  public String getPublisher() {
-    return publisher;
-  }
-
   public Author setPublisher(String publisher) {
     this.publisher = publisher;
-    return this;
-  }
-
-  public Author setBooks(List<Book> books) {
-    this.books = books;
     return this;
   }
 
