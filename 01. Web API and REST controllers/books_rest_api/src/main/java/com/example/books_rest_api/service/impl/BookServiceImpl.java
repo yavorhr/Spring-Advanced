@@ -71,6 +71,11 @@ public class BookServiceImpl implements BookService {
     return this.bookRepository.findById(id).map(b -> this.modelMapper.map(b, BookDto.class));
   }
 
+  @Override
+  public void deleteBook(Long id) {
+    this.bookRepository.deleteById(id);
+  }
+
   private Author getAuthorByNames(String token) {
     String firstName = token.split(" ")[0];
     String lastName = token.split(" ")[1];
