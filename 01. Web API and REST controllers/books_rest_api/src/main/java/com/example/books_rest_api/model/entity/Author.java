@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,6 +15,12 @@ public class Author extends BaseEntity {
   private List<Book> books;
 
   public Author() {
+  }
+
+  public Author(String firstName, String lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.books = new ArrayList<>();
   }
 
   @OneToMany(mappedBy = "author")
