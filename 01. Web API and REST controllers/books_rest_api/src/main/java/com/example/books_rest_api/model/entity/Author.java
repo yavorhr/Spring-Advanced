@@ -1,6 +1,7 @@
 package com.example.books_rest_api.model.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -23,7 +24,7 @@ public class Author extends BaseEntity {
     this.books = new ArrayList<>();
   }
 
-  @OneToMany(mappedBy = "author")
+  @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
   public List<Book> getBooks() {
     return books;
   }
