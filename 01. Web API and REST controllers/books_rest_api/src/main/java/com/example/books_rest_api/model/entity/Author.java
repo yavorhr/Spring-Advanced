@@ -11,8 +11,6 @@ import java.util.List;
 public class Author extends BaseEntity {
   private String firstName;
   private String lastName;
-  private Integer age;
-  private String publisher;
   private List<Book> books;
 
   public Author() {
@@ -31,14 +29,6 @@ public class Author extends BaseEntity {
     return lastName;
   }
 
-  public Integer getAge() {
-    return age;
-  }
-
-  public String getPublisher() {
-    return publisher;
-  }
-
   public Author setBooks(List<Book> books) {
     this.books = books;
     return this;
@@ -54,28 +44,17 @@ public class Author extends BaseEntity {
     return this;
   }
 
-  public Author setAge(Integer age) {
-    this.age = age;
-    return this;
-  }
-
-  public Author setPublisher(String publisher) {
-    this.publisher = publisher;
-    return this;
-  }
-
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append(String.format("Author's full name : %s %s", this.firstName, this.lastName))
-            .append(System.lineSeparator())
-            .append(String.format("Age : %d", this.age))
-            .append(System.lineSeparator())
-            .append(String.format("Publisher: %s", this.publisher))
-            .append(System.lineSeparator())
-            .append("Books:").append(System.lineSeparator());
 
-    this.getBooks().forEach(b -> sb.append(b.toString()).append(System.lineSeparator()));
+    sb
+            .append(String.format("Author's full name : %s %s\n", this.firstName, this.lastName))
+            .append("Books titles:\n");
+
+    this.getBooks().forEach(b -> sb
+            .append(b.toString())
+            .append(System.lineSeparator()));
 
     return sb.toString().trim();
   }
