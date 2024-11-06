@@ -15,6 +15,14 @@ public class Book extends BaseEntity {
   private Author author;
   private String publisher;
 
+  public Book(String title, LocalDate releaseDate, Integer copies, Author author, String publisher) {
+    this.title = title;
+    this.releaseDate = releaseDate;
+    this.copies = copies;
+    this.author = author;
+    this.publisher = publisher;
+  }
+
   public Book() {
   }
 
