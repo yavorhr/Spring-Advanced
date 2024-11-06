@@ -5,6 +5,10 @@ import com.example.books_rest_api.repository.AuthorRepository;
 import com.example.books_rest_api.service.AuthorService;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.Scanner;
 
 @Service
@@ -18,26 +22,28 @@ public class AuthorServiceImpl implements AuthorService {
   }
 
   @Override
-  public void initAuthors() {
+  public void initAuthors() throws IOException {
 
     if (this.authorRepository.count() == 0) {
-      System.out.println("Please insert authors: ");
-//      Hristo Botev - Elin Pelin - Ivan Vazov - Yordan Yovkov - Hristo Smirnenski
-      String[] authors = scanner.nextLine().split(" - ");
+      List<String> lines =
+              Files.readAllLines(Path.of("src/main/resources/static/authors"));
 
-      for (int i = 0; i < authors.length; i++) {
-        Author author = new Author();
+      for (String line : lines) {
 
-        String[] tokens = authors[i].split(" ");
+        String[] tokens = line.split(" ");
+        String firstName = tokens[0];
+        String lastName = tokens[1];
 
-        author
-                .setFirstName(tokens[0])
-                .setLastName(tokens[1]);
-
-        this.authorRepository.save(author);
+        this.authorRepository.save(new Author(firstName,lastName));
       }
     }
   }
+
+  @Override
+  public Author findAuthorByFirstAndLastNames(String firstName, String lastName) {
+    return this.authorRepository.findByFirstNameAndLastName(firstName,lastName).get();
+  }
 }
+
 
 

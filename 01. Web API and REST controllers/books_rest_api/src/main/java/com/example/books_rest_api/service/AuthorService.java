@@ -1,5 +1,11 @@
 package com.example.books_rest_api.service;
 
+import com.example.books_rest_api.model.entity.Author;
+
+import java.io.IOException;
+
 public interface AuthorService {
-  void initAuthors();
+  void initAuthors() throws IOException;
+
+  Author findAuthorByFirstAndLastNames(String firstName, String lastName);
 }
