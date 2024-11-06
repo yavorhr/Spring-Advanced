@@ -1,11 +1,13 @@
 package com.example.books_rest_api.service.impl;
 
+import com.example.books_rest_api.model.dto.AuthorDto;
+import com.example.books_rest_api.model.dto.BookDto;
 import com.example.books_rest_api.model.entity.Author;
 import com.example.books_rest_api.model.entity.Book;
 import com.example.books_rest_api.repository.BookRepository;
 import com.example.books_rest_api.service.AuthorService;
 import com.example.books_rest_api.service.BookService;
-import org.springframework.cglib.core.Local;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -13,15 +15,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookService {
   private final AuthorService authorService;
   private final BookRepository bookRepository;
+  private final ModelMapper modelMapper;
 
-  public BookServiceImpl(AuthorService authorService, BookRepository bookRepository) {
+  public BookServiceImpl(AuthorService authorService, BookRepository bookRepository, ModelMapper modelMapper) {
     this.authorService = authorService;
     this.bookRepository = bookRepository;
+    this.modelMapper = modelMapper;
   }
 
   @Override
@@ -43,6 +48,21 @@ public class BookServiceImpl implements BookService {
                 this.bookRepository.save(book);
               });
     }
+  }
+
+  @Override
+  public List<BookDto> findAllBooks() {
+    return this.bookRepository
+            .findAll()
+            .stream()
+            .map(b -> {
+              BookDto bookDto = this.modelMapper.map(b, BookDto.class);
+              AuthorDto authorDto = this.modelMapper.map(b.getAuthor(), AuthorDto.class);
+              bookDto.setAuthor(authorDto);
+
+              return bookDto;
+            })
+            .collect(Collectors.toList());
   }
 
   private Author getAuthorByNames(String token) {
