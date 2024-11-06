@@ -1,7 +1,6 @@
 package com.example.books_rest_api.model.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -18,12 +17,6 @@ public class Book extends BaseEntity {
   public Book() {
   }
 
-  @ManyToOne
-  @JoinColumn(name = "author_id", nullable = false)
-  public Author getAuthor() {
-    return author;
-  }
-
   public String getTitle() {
     return title;
   }
@@ -36,6 +29,10 @@ public class Book extends BaseEntity {
     return copies;
   }
 
+  @ManyToOne
+  public Author getAuthor() {
+    return author;
+  }
 
   public Book setTitle(String title) {
     this.title = title;
