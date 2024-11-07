@@ -7,5 +7,5 @@ import java.io.IOException;
 public interface AuthorService {
   void initAuthors() throws IOException;
 
-  Author findAuthorByFirstAndLastNames(String firstName, String lastName);
+  Author findByName(String fullName);
 }
