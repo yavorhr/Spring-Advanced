@@ -28,21 +28,18 @@ public class AuthorServiceImpl implements AuthorService {
       List<String> lines =
               Files.readAllLines(Path.of("src/main/resources/static/authors"));
 
-      for (String line : lines) {
+      for (String authorsName : lines) {
 
-        String[] tokens = line.split(" ");
-        String firstName = tokens[0];
-        String lastName = tokens[1];
-
-        this.authorRepository.save(new Author(firstName,lastName));
+        this.authorRepository.save(new Author(authorsName));
       }
     }
   }
 
   @Override
-  public Author findAuthorByFirstAndLastNames(String firstName, String lastName) {
-    return this.authorRepository.findByFirstNameAndLastName(firstName,lastName).get();
+  public Author findByName(String fullName) {
+    return this.authorRepository.findByFullName(fullName).get();
   }
+
 }
 
 
