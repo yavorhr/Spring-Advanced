@@ -1,39 +1,38 @@
-$('#loadAuthors').click(() => {
-  $('.authors-container').empty();
-  $('.books-container').empty();
+document.addEventListener('DOMContentLoaded', function () {
+    const booksTableBody = document.querySelector('#booksTable tbody');
+    const form = document.querySelector('form');
+    const searchInput = document.querySelector('#searchInput');
 
-  fetch('http://localhost:8080/authors').
-      then((response) => response.json()).
-      then((json) => json.forEach((author, idx) => {
-        console.log(author.name);
+    // 1. Load all books from the endpoint and display them in the table
+    function loadBooks() {
+        fetch('http://localhost:8080/books')
+            .then(response => response.json())
+            .then(books => {
+                booksTableBody.innerHTML = ''; // Clear current rows
+                books.forEach(book => {
+                    appendBookToTable(book);
+                });
+            })
+            .catch(error => console.error('Error loading books:', error));
+    }
 
-        let tableRow = '<tr>' +
-            '<td>' + author.id + '</td>' +
-            '<td>' + author.name + '</td>' +
-            '<td><button class="book-btn" data-author-id="' + author.id+ '">Show books</button></td>' +
-            '<td><button>Delete</button></td>' +
-            '</tr>'
-      $('.authors-container').append(tableRow);
-  }))
+    // Helper function to create and append a book row to the table
+    function appendBookToTable(book) {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+            <td>${book.title}</td>
+            <td>${book.author.fullName}</td>
+            <td>${book.releaseDate}</td>
+            <td>${book.copies}</td>
+            <td>${book.publisher}</td>
+            <td>
+            <button class="delete-btn" data-id="${book.id}">Delete</button>
+            </td>
+        `;
+        booksTableBody.appendChild(row);
+
+        // Initial load of books
+    }
+        loadBooks();
 });
-
-$('body').on('click', 'button.book-btn', function() {
-  let authorId = $(this).data('author-id');
-  console.log("Author Id is " + authorId);
-
-  $('.books-container').empty();
-
-  fetch('http://localhost:8080/authors/'+authorId+'/books').
-    then((response) => response.json()).
-    then((json) => json.forEach((book, idx)=> {
-      console.log(book.title);
-
-      let tableRow =
-          '<tr>' +
-          '<td>' + book.title + '</td>' +
-          '<td><button>Delete book</button></td>' +
-          '</tr>';
-
-      $('.books-container').append(tableRow);
-  }))
-})
