@@ -4,10 +4,12 @@ import com.example.books_rest_api.model.entity.Author;
 import com.example.books_rest_api.repository.AuthorRepository;
 import com.example.books_rest_api.service.AuthorService;
 import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -30,10 +32,14 @@ public class AuthorServiceImpl implements AuthorService {
   }
 
   @Override
-  public Author findByName(String fullName) {
-    return this.authorRepository.findByFullName(fullName).get();
+  public Optional<Author> findByName(String fullName) {
+    return this.authorRepository.findByFullName(fullName);
   }
 
+  @Override
+  public Author saveAuthor(Author author) {
+    return this.authorRepository.save(author);
+  }
 }
 
 
