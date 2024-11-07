@@ -43,7 +43,7 @@ public class BooksController {
     this.bookService.deleteBook(id);
 
     return ResponseEntity
-            .notFound()
+            .noContent()
             .build();
   }
 
