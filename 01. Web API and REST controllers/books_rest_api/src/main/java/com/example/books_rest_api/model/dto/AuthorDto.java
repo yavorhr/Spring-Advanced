@@ -2,9 +2,7 @@ package com.example.books_rest_api.model.dto;
 
 public class AuthorDto {
   private Long id;
-  private String firstName;
-  private String lastName;
-
+  private String fullName;
 
   public AuthorDto() {
   }
@@ -13,26 +11,17 @@ public class AuthorDto {
     return id;
   }
 
-  public String getFirstName() {
-    return firstName;
+  public String getFullName() {
+    return fullName;
   }
 
-  public String getLastName() {
-    return lastName;
-  }
-
-  public AuthorDto setFirstName(String firstName) {
-    this.firstName = firstName;
+  public AuthorDto setFullName(String fullName) {
+    this.fullName = fullName;
     return this;
   }
 
   public AuthorDto setId(Long id) {
     this.id = id;
-    return this;
-  }
-
-  public AuthorDto setLastName(String lastName) {
-    this.lastName = lastName;
     return this;
   }
 }
