@@ -41,7 +41,7 @@ public class BookServiceImpl implements BookService {
                 int year = Integer.parseInt(tokens[2]);
                 LocalDate date = LocalDate.of(year, 1, 1);
 
-                Author author = getAuthorByNames(tokens[0]);
+                Author author = getAuthorByName(tokens[0]);
                 Integer copies = Integer.parseInt(tokens[3]);
                 String publisher = tokens[4];
 
@@ -76,11 +76,21 @@ public class BookServiceImpl implements BookService {
     this.bookRepository.deleteById(id);
   }
 
-  private Author getAuthorByNames(String token) {
-    String firstName = token.split(" ")[0];
-    String lastName = token.split(" ")[1];
+  @Override
+  public Long createBook(BookDto bookDto) {
+    Book book = this.modelMapper.map(bookDto, Book.class);
 
-    return this.authorService.findAuthorByFirstAndLastNames(firstName, lastName);
+    Author author =
+            this.authorService.findByName(bookDto.getAuthor().getFullName());
+
+    book.setAuthor(author);
+
+    book = this.bookRepository.save(book);
+    return book.getId();
+  }
+
+  private Author getAuthorByName(String name) {
+    return this.authorService.findByName(name);
   }
 }
 

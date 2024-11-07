@@ -14,4 +14,6 @@ public interface BookService {
   Optional<BookDto> findById(Long id);
 
   void deleteBook(Long id);
+
+  Long createBook(BookDto bookDto);
 }
