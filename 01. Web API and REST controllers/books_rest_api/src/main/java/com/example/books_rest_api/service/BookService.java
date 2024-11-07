@@ -1,5 +1,6 @@
 package com.example.books_rest_api.service;
 
+import com.example.books_rest_api.model.dto.AddBookDto;
 import com.example.books_rest_api.model.dto.BookDto;
 
 import java.io.IOException;
@@ -15,5 +16,5 @@ public interface BookService {
 
   void deleteBook(Long id);
 
-  Long createBook(BookDto bookDto);
+  BookDto createBook(AddBookDto addBookDto);
 }
