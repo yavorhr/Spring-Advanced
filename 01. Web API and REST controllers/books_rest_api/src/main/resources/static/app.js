@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         row.querySelector('.delete-btn').addEventListener('click', function () {
             deleteBook(book.id, row);
         });
+
         booksTableBody.appendChild(row);
     }
 
@@ -53,8 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => console.error('Error deleting book:', error));
     }
-
-
+    
     // 3. Handle form submission to create a new book and render it
     form.addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent form from submitting normally
@@ -82,6 +82,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 form.reset(); // Clear form inputs
             })
             .catch(error => console.error('Error creating book:', error));
+    });
+
+    // 4. Search functionality to filter books by title
+    searchInput.addEventListener('input', function () {
+        const query = searchInput.value.toLowerCase();
+        const rows = booksTableBody.querySelectorAll('tr');
+
+        rows.forEach(row => {
+            const title = row.querySelector('td').textContent.toLowerCase();
+            if (title.includes(query)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
     });
 
     //Init load of books
