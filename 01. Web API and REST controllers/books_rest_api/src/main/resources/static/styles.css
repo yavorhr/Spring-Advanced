@@ -30,15 +30,6 @@ table tbody tr:nth-child(odd){
     border-bottom: 1px solid black;
 }
 
-table tbody tr:nth-child(odd) button{
-    background: #234465;
-    color:white;
-}
-
-table tbody tr:nth-child(even) button{
-    background: white;
-    color:#234465;
-}
 
 table tr td:not(:last-child):hover{
     text-decoration: underline;
@@ -91,5 +82,24 @@ form button{
     color:white;
     border: none;
     padding: 0.5%;
+}
+
+.delete-btn {
+    background-color: silver; /* Red color */
+    color: #fff; /* White text */
+    border: none; /* Remove border */
+    padding: 8px 12px; /* Padding for size */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 14px; /* Font size */
+    transition: background-color 0.3s, transform 0.1s; /* Smooth transitions */
+}
+
+.delete-btn:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+.delete-btn:active {
+    transform: scale(0.98); /* Slight shrink effect on click */
 }
 
