@@ -30,9 +30,32 @@ document.addEventListener('DOMContentLoaded', function () {
             <button class="delete-btn" data-id="${book.id}">Delete</button>
             </td>
         `;
+
+        // Add event listener for delete button
+        row.querySelector('.delete-btn').addEventListener('click', function () {
+            deleteBook(book.id, row);
+        });
+
         booksTableBody.appendChild(row);
 
         // Initial load of books
+    }
+
+    // 2. Delete a book using AJAX and remove the element from the table
+    function deleteBook(bookId, rowElement) {
+        fetch(`http://localhost:8080/books/${bookId}`, {
+            method: 'DELETE'
+        })
+            .then(response => {
+                if (response.ok) {
+                    rowElement.remove(); // Remove the row from the table
+                    loadBooks();
+                    console.log(`Book with ID ${bookId} deleted`);
+                } else {
+                    console.error(`Failed to delete book with ID ${bookId}`);
+                }
+            })
+            .catch(error => console.error('Error deleting book:', error));
     }
         loadBooks();
 });
