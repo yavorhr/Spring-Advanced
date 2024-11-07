@@ -21,12 +21,10 @@ public class AuthorServiceImpl implements AuthorService {
   public void initAuthors() throws IOException {
 
     if (this.authorRepository.count() == 0) {
-      List<String> lines =
-              Files.readAllLines(Path.of("src/main/resources/static/authors"));
+      List<String> authors = Files.readAllLines(Path.of("src/main/resources/static/authors"));
 
-      for (String authorsName : lines) {
-
-        this.authorRepository.save(new Author(authorsName));
+      for (String name : authors) {
+        this.authorRepository.save(new Author(name));
       }
     }
   }
