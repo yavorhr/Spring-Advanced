@@ -1,11 +1,10 @@
 package com.example.books_rest_api.web;
 
+import com.example.books_rest_api.model.dto.AddBookDto;
 import com.example.books_rest_api.model.dto.BookDto;
-import com.example.books_rest_api.model.entity.Book;
 import com.example.books_rest_api.service.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
@@ -49,16 +48,15 @@ public class BooksController {
 
   @PostMapping()
   public ResponseEntity<BookDto> createBook(
-          @RequestBody BookDto bookDto,
-          UriComponentsBuilder builder) {
-    Long bookId = this.bookService.createBook(bookDto);
-    // http://localhost:8080/books/id
+          @RequestBody AddBookDto addBookDto) {
 
-    URI location = builder.path("/books/{id}")
-            .buildAndExpand(bookId).toUri();
+    BookDto bookDto =
+            this.bookService.createBook(addBookDto);
+
+    URI location = URI.create("/books/" + bookDto.getId());
 
     return ResponseEntity
-            .created(location)
-            .build();
+            .created(location) // Sets HTTP status 201
+            .body(bookDto); // Includes the created resource in the response body
   }
 }
