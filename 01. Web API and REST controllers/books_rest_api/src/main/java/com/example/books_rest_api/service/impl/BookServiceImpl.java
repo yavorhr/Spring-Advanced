@@ -1,5 +1,6 @@
 package com.example.books_rest_api.service.impl;
 
+import com.example.books_rest_api.model.dto.AddBookDto;
 import com.example.books_rest_api.model.dto.AuthorDto;
 import com.example.books_rest_api.model.dto.BookDto;
 import com.example.books_rest_api.model.entity.Author;
@@ -58,16 +59,22 @@ public class BookServiceImpl implements BookService {
   }
 
   @Override
-  public Long createBook(BookDto bookDto) {
-    Book book = this.modelMapper.map(bookDto, Book.class);
+  public BookDto createBook(AddBookDto addBookDto) {
+    Book book = this.modelMapper.map(addBookDto, Book.class);
 
-    Author author =
-            this.authorService.findByName(bookDto.getAuthor().getFullName());
+    Optional<Author> author = this.authorService.findByName(addBookDto.getAuthor());
 
-    book.setAuthor(author);
+    if (author.isEmpty()) {
+      var newAuthor = new Author(addBookDto.getAuthor());
+      newAuthor = this.authorService.saveAuthor(newAuthor);
+      book.setAuthor(newAuthor);
+    } else {
+      book.setAuthor(author.get());
+    }
 
     book = this.bookRepository.save(book);
-    return book.getId();
+
+    return this.modelMapper.map(book, BookDto.class);
   }
 
   @Override
@@ -89,7 +96,7 @@ public class BookServiceImpl implements BookService {
     int year = Integer.parseInt(tokens[2]);
     LocalDate date = LocalDate.of(year, 1, 1);
 
-    Author author = getAuthorByName(tokens[0]);
+    Author author = getAuthorByName(tokens[0]).get();
     Integer copies = Integer.parseInt(tokens[3]);
     String publisher = tokens[4];
 
@@ -100,7 +107,7 @@ public class BookServiceImpl implements BookService {
     return this.modelMapper.map(b, BookDto.class);
   }
 
-  private Author getAuthorByName(String name) {
+  private Optional<Author> getAuthorByName(String name) {
     return this.authorService.findByName(name);
   }
 }
