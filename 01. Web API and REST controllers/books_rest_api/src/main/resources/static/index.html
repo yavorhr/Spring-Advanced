@@ -9,7 +9,15 @@
 </head>
 <body>
 
-<button id="loadAuthors">LOAD ALL BOOKS</button>
+<div class="search-wrapper">
+    <div class="search-container">
+        <input type="text"
+               id="searchInput"
+               placeholder="Search by title"/>
+        <button id="searchButton" class="search-btn">Search</button>
+    </div>
+</div>
+
 
 <!-- Authors -->
 <div class="table-container">
@@ -50,7 +58,7 @@
     <form
             action="#"
             method="post">
-        <h2>Book Details</h2>
+        <h2>Add Book</h2>
         <div class="form-group">
             <label for="title">Title:</label>
             <input
