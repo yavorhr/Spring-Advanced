@@ -4,21 +4,17 @@ import com.example.books_rest_api.model.entity.Author;
 import com.example.books_rest_api.repository.AuthorRepository;
 import com.example.books_rest_api.service.AuthorService;
 import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Scanner;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
   private final AuthorRepository authorRepository;
-  private final Scanner scanner;
 
-  public AuthorServiceImpl(AuthorRepository authorRepository, Scanner scanner) {
+  public AuthorServiceImpl(AuthorRepository authorRepository) {
     this.authorRepository = authorRepository;
-    this.scanner = scanner;
   }
 
   @Override
