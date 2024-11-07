@@ -11,16 +11,18 @@ import java.util.List;
 @Entity
 @Table(name = "authors")
 public class Author extends BaseEntity {
-  private String firstName;
-  private String lastName;
+  private String fullName;
   private List<Book> books;
 
   public Author() {
   }
 
-  public Author(String firstName, String lastName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
+  public String getFullName() {
+    return fullName;
+  }
+
+  public Author(String fullName) {
+    this.fullName = fullName;
     this.books = new ArrayList<>();
   }
 
@@ -29,26 +31,13 @@ public class Author extends BaseEntity {
     return books;
   }
 
-  public String getFirstName() {
-    return firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
   public Author setBooks(List<Book> books) {
     this.books = books;
     return this;
   }
 
-  public Author setFirstName(String firstName) {
-    this.firstName = firstName;
-    return this;
-  }
-
-  public Author setLastName(String lastName) {
-    this.lastName = lastName;
+  public Author setFullName(String fullName) {
+    this.fullName = fullName;
     return this;
   }
 
@@ -57,7 +46,7 @@ public class Author extends BaseEntity {
     StringBuilder sb = new StringBuilder();
 
     sb
-            .append(String.format("Author's full name : %s %s\n", this.firstName, this.lastName))
+            .append(String.format("Author's name name : %s \n", this.fullName))
             .append("Books titles:\n");
 
     this.getBooks().forEach(b -> sb
