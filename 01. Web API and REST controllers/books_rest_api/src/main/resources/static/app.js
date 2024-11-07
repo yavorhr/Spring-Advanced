@@ -30,15 +30,11 @@ document.addEventListener('DOMContentLoaded', function () {
             <button class="delete-btn" data-id="${book.id}">Delete</button>
             </td>
         `;
-
         // Add event listener for delete button
         row.querySelector('.delete-btn').addEventListener('click', function () {
             deleteBook(book.id, row);
         });
-
         booksTableBody.appendChild(row);
-
-        // Initial load of books
     }
 
     // 2. Delete a book using AJAX and remove the element from the table
@@ -57,5 +53,37 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => console.error('Error deleting book:', error));
     }
+
+
+    // 3. Handle form submission to create a new book and render it
+    form.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent form from submitting normally
+
+        const formData = new FormData(form);
+
+        const newBook = {
+            title: formData.get('title'),
+            author: formData.get('author'),
+            releaseDate: formData.get('releaseDate'),
+            copies: parseInt(formData.get('copies'), 10),
+            publisher: formData.get('publisher')
+        };
+
+        fetch('http://localhost:8080/books', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newBook)
+        })
+            .then(response => response.json())
+            .then(createdBook => {
+                appendBookToTable(createdBook);
+                form.reset(); // Clear form inputs
+            })
+            .catch(error => console.error('Error creating book:', error));
+    });
+
+    //Init load of books
         loadBooks();
 });
