@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => console.error('Error deleting book:', error));
     }
-    
+
     // 3. Handle form submission to create a new book and render it
     form.addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent form from submitting normally
