@@ -1,12 +1,10 @@
-package bg.softuni.errors.web;
+package bg.softuni.errors.web.controllers;
 
 
-import org.springframework.http.HttpStatus;
+import bg.softuni.errors.web.exceptions.ObjectNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ProductController {

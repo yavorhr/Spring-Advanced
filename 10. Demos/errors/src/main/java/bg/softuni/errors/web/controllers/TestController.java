@@ -1,4 +1,4 @@
-package bg.softuni.errors.web;
+package bg.softuni.errors.web.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,5 +15,4 @@ public class TestController {
 
     return "hello";
   }
-
 }
