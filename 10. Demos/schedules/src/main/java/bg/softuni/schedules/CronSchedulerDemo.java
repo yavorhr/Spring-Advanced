@@ -16,5 +16,4 @@ public class CronSchedulerDemo {
     LOGGER.info("Hello, from cron scheduller at {}", LocalDateTime.now());
   }
 
-
 }

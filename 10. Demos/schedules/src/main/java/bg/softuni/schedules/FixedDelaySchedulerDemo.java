@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FixedDelaySchedulerDemo {
+public class  FixedDelaySchedulerDemo {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(FixedDelaySchedulerDemo.class);
 
