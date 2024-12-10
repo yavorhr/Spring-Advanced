@@ -15,16 +15,10 @@ public class StudentsServiceImpl implements StudentsService {
   private Map<String, String> students;
 
   public StudentsServiceImpl() {
-    this.students = new HashMap<>();
+    students = new HashMap<>();
     students.put("student1", "Pesho");
     students.put("student2", "Georgi");
     students.put("student3", "Mike");
-  }
-
-  @CacheEvict(value = "students", allEntries = true) // Clear all cache entries for "students"
-  public void addStudent(String id, String name) {
-    logger.info("Adding new student: " + id + " - " + name);
-    students.put(id, name);
   }
 
   @Override
@@ -36,13 +30,16 @@ public class StudentsServiceImpl implements StudentsService {
     try {
       Thread.sleep(4000);
     } catch (InterruptedException ignored) {
-
     }
 
     logger.info("doing something additionally...");
-
     return students;
   }
 
+  @CacheEvict(value = "students", allEntries = true) // Clear all cache entries for "students"
+  public void addStudent(String id, String name) {
+    logger.info("Adding new student: " + id + " - " + name);
+    students.put(id, name);
+  }
 
 }
