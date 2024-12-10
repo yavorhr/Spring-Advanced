@@ -2,9 +2,8 @@ package com.example.cache.web;
 
 import com.example.cache.service.StudentsService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Map;
 
 @RestController
@@ -21,6 +20,12 @@ public class StudentsController {
     Map<String, String> studentsNames = this.studentsService.getAllStudentsNames();
 
     return ResponseEntity.ok(studentsNames);
+  }
 
+  @PostMapping("/add")
+  public ResponseEntity<Map<String, String>> addStudent(@RequestParam String id, @RequestParam String name) {
+    this.studentsService.addStudent(id, name);
+
+    return ResponseEntity.ok(this.studentsService.getAllStudentsNames());
   }
 }
