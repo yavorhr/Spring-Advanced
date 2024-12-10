@@ -1,6 +1,5 @@
 package bg.softuni.student;
 
-
 import java.lang.reflect.Proxy;
 
 public class Test {
