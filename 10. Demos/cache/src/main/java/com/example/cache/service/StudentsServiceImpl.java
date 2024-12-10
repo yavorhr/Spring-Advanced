@@ -1,8 +1,10 @@
 package com.example.cache.service;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -10,6 +12,20 @@ import java.util.logging.Logger;
 public class StudentsServiceImpl implements StudentsService {
 
   private final Logger logger = Logger.getLogger(StudentsServiceImpl.class.getName());
+  private Map<String, String> students;
+
+  public StudentsServiceImpl() {
+    this.students = new HashMap<>();
+    students.put("student1", "Pesho");
+    students.put("student2", "Georgi");
+    students.put("student3", "Mike");
+  }
+
+  @CacheEvict(value = "students", allEntries = true) // Clear all cache entries for "students"
+  public void addStudent(String id, String name) {
+    logger.info("Adding new student: " + id + " - " + name);
+    students.put(id, name);
+  }
 
   @Override
   @Cacheable("students")
@@ -25,8 +41,8 @@ public class StudentsServiceImpl implements StudentsService {
 
     logger.info("doing something additionally...");
 
-    return Map.of(  "student1", "Pesho",
-            "student2", "Georgi",
-            "student3", "Mike");
+    return students;
   }
+
+
 }
