@@ -1,5 +1,6 @@
 package com.example.cache.service;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -11,6 +12,7 @@ public class StudentsServiceImpl implements StudentsService {
   private final Logger logger = Logger.getLogger(StudentsServiceImpl.class.getName());
 
   @Override
+  @Cacheable("students")
   public Map<String, String> getAllStudentsNames() {
 
     logger.info("Doing something in StudentService component...");
