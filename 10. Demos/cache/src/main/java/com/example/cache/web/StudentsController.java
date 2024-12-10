@@ -23,7 +23,8 @@ public class StudentsController {
   }
 
   @PostMapping("/add")
-  public ResponseEntity<Map<String, String>> addStudent(@RequestParam String id, @RequestParam String name) {
+  public ResponseEntity<Map<String, String>> addStudent(@RequestParam String id,
+                                                        @RequestParam String name) {
     this.studentsService.addStudent(id, name);
 
     return ResponseEntity.ok(this.studentsService.getAllStudentsNames());
