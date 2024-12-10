@@ -1,7 +1,6 @@
 package bg.softuni.aop.modifying;
 
 import bg.softuni.aop.Student;
-import bg.softuni.aop.basic.BasicExampleAspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Component;
 public class ModifyingExample implements CommandLineRunner {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ModifyingExample.class);
-
 
   private final Student student;
 
